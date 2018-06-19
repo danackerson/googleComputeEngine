@@ -32,6 +32,7 @@ func main() {
 	// Use the email & privateKey from the JSON file (good for ENV vars & CircleCI ;)
 	email := os.Getenv("GCE_EMAIL")
 	privateKey := os.Getenv("GCE_PRIVATE_KEY")
+	log.Println(privateKey)
 	// this key will have a bunch of '\n's which must be removed and replaced with hard returns.
 	// paste result into CircleCI env var
 
