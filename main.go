@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strings"
 
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
@@ -32,7 +33,8 @@ func main() {
 	// Use the email & privateKey from the JSON file (good for ENV vars & CircleCI ;)
 	email := os.Getenv("GCE_EMAIL")
 	privateKey := os.Getenv("GCE_PRIVATE_KEY")
-	log.Println(privateKey)
+	privateKey = strings.Replace(privateKey, "\\n", "\n", -1)
+
 	// this key will have a bunch of '\n's which must be removed and replaced with hard returns.
 	// paste result into CircleCI env var
 
