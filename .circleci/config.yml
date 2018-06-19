@@ -4,7 +4,8 @@ jobs:
     docker:
       - image: golang:1.10-alpine
 
-    working_directory: /go/src/github.com/{{ORG_NAME}}/{{REPO_NAME}}
+    working_directory: $CIRCLE_WORKING_DIRECTORY
+
     steps:
       - checkout
       - run: apk add -U git
