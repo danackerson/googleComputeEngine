@@ -53,11 +53,6 @@ func main() {
 		log.Fatal(err)
 	}
 
-	/*type booleanator struct {
-		is *bool
-	}*/
-	//setTrue := booleanator{is: &[]bool{true}[0]}
-	//setFalse := booleanator{is: &[]bool{false}[0]}
 	setFalse := false
 
 	projectID := "kubernetes-207013"
