@@ -64,7 +64,7 @@ func main() {
 	prefix := "https://www.googleapis.com/compute/v1/projects/" + projectID
 	imageURL := "projects/coreos-cloud/global/images/coreos-stable-1745-7-0-v20180614"
 	zone := "us-east1-b"
-	instanceName := "bluesbros"
+	instanceName := "bluesbros2"
 
 	rb := &compute.Instance{
 		MachineType:        prefix + "/zones/" + zone + "/machineTypes/f1-micro",
