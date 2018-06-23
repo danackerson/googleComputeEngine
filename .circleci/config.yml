@@ -18,7 +18,7 @@ jobs:
              --service-account "circleci@${GOOGLE_PROJECT_ID}.iam.gserviceaccount.com" \
              --num-nodes "1" --enable-stackdriver-kubernetes --network "default" \
              --subnetwork "default" --enable-autoupgrade --enable-autorepair \
-             --addons HorizontalPodAutoscaling,HttpLoadBalancing,KubernetesDashboard \
+             --addons HorizontalPodAutoscaling,HttpLoadBalancing,KubernetesDashboard
              gcloud --quiet container clusters get-credentials ${GOOGLE_CLUSTER_NAME}
 
 #version: 2
