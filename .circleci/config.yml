@@ -9,8 +9,10 @@ jobs:
           command: echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
       - run: |
              gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
+             gcloud components install kubectl
              gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
-             gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
+             gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}-b
+             gcloud --quiet beta container clusters create ${GOOGLE_CLUSTER_NAME} --username "admin" --cluster-version "1.10.4-gke.2" --machine-type "f1-micro" --image-type "COS" --disk-type "pd-standard" --disk-size "10" --service-account "circleci@${GOOGLE_PROJECT_ID}.iam.gserviceaccount.com" --preemptible --num-nodes "1" --enable-stackdriver-kubernetes --network "default" --subnetwork "default" --additional-zones "us-east1-c","us-east1-d" --addons HorizontalPodAutoscaling,HttpLoadBalancing,KubernetesDashboard --enable-autoupgrade --enable-autorepair
              gcloud --quiet container clusters get-credentials ${GOOGLE_CLUSTER_NAME}
 
 #version: 2
