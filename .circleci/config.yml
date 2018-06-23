@@ -1,13 +1,28 @@
 version: 2
 jobs:
-  build:
+  deploy:
     docker:
-      - image: golang:1.10-alpine
-
-    working_directory: $CIRCLE_WORKING_DIRECTORY
-
+      - image: google/cloud-sdk:alpine
     steps:
-      - checkout
-      - run: apk add -U git
-      - run: go get -v -t -d ./...
-      - run: go run main.go
+      - run:
+        name: Store Service Account
+        command: echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
+      - run: |
+             sudo gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
+             sudo gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+             sudo gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
+             sudo gcloud --quiet container clusters get-credentials ${GOOGLE_CLUSTER_NAME}
+
+#version: 2
+# jobs:
+#   build:
+#     docker:
+#       - image: golang:1.10-alpine
+#
+#     working_directory: $CIRCLE_WORKING_DIRECTORY
+#
+#     steps:
+#       - checkout
+#       - run: apk add -U git
+#       - run: go get -v -t -d ./...
+#       - run: go run main.go
