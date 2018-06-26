@@ -112,7 +112,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	// TODO: Change code below to process the `resp` object:
 	fmt.Printf("%#v\n", resp)
 
 	inst, err := computeService.Instances.Get(projectID, zone, instanceName).Context(ctx).Do()
